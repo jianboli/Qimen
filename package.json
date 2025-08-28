@@ -1,0 +1,16 @@
+{
+  "name": "qimen-electron-app",
+  "version": "1.0.0",
+  "description": "An Electron app for playing with Qimen grid patterns",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging"
+  },
+  "keywords": ["electron", "qimen", "chinese", "grid"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0"
+  }
+}
