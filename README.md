@@ -11,9 +11,10 @@ A beautiful Electron application for exploring Qimen Dunjia patterns with the Te
    8 | 1 | 6
   ```
 
-- **六仪 (Six Instruments)**: Uses the sequence 戊己庚辛壬癸丁丙乙 (9 characters)
+- **六仪 (Six Instruments)**: Uses the sequence 戊己庚辛壬癸
+- **三奇 （Three Odds）**：丁丙乙
 - **九宫 (Nine Palaces)**: Choose any starting position (1-9)
-- **五遁 (Five Escapes)**: 阳遁 (Yang Escape) or 阴遁 (Yin Escape)
+- **遁甲 (Escapes)**: 阳遁 (Yang Escape) or 阴遁 (Yin Escape)
 - **Interactive Grid**: Click on grid cells to set starting position
 - **Traditional Table Display**: Shows 六甲, 甲子 series, and 星奇月奇日奇
 - **Modern UI**: Beautiful, responsive design with smooth animations
