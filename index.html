@@ -12,7 +12,15 @@
             <h1>十天干与九宫八卦</h1>
         </header>
 
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" data-tab="qimen-tab">奇门遁甲</button>
+            <button class="tab-button" data-tab="bagua-tab">八卦图</button>
+        </div>
+
         <main>
+            <!-- Qimen Tab Content -->
+            <div id="qimen-tab" class="tab-content active">
             <div class="controls">
                 <div class="control-group">
                     <label for="direction">五遁</label>
@@ -122,9 +130,57 @@
                     </tr>
                 </table>
             </div>
+            </div>
+
+            <!-- Bagua Tab Content -->
+            <div id="bagua-tab" class="tab-content">
+                <div class="bagua-container">
+                    <h2>九宫八卦图</h2>
+                    <p class="bagua-description"></p>
+                    <div class="bagua-svg-container">
+                        <svg width="400" height="400"></svg>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
+    <!-- Include D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Bagua UI functionality -->
+    <script src="bagua-ui.js"></script>
+    <!-- Tab functionality script -->
+    <script>
+        // Tab switching functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.dataset.tab;
+
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+
+                    // Initialize bagua if switching to bagua tab
+                    if (targetTab === 'bagua-tab') {
+                        // Clear and reinitialize the SVG
+                        d3.select('#bagua-tab svg').selectAll('*').remove();
+                        // Re-run bagua.js code
+                        initializeBagua();
+                    }
+                });
+            });
+
+
+        });
+    </script>
     <script src="renderer.js"></script>
 </body>
 </html>

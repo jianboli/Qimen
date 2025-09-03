@@ -4,6 +4,7 @@ A beautiful Electron application for exploring Qimen Dunjia patterns with the Te
 
 ## Features
 
+### 奇门遁甲 (Qimen Dunjia) Tab
 - **3x3 Grid Layout**: Displays the traditional Qimen grid with positions:
   ```
    4 | 9 | 2 
@@ -17,16 +18,32 @@ A beautiful Electron application for exploring Qimen Dunjia patterns with the Te
 - **遁甲 (Escapes)**: 阳遁 (Yang Escape) or 阴遁 (Yin Escape)
 - **Interactive Grid**: Click on grid cells to set starting position
 - **Traditional Table Display**: Shows 六甲, 甲子 series, and 星奇月奇日奇
+
+### 九宫八卦图 (Nine Palace Bagua Diagram) Tab
+- **Interactive Bagua Diagram**: Traditional Fuxi Bagua arrangement with D3.js
+- **Taiji Symbol**: Central Yin-Yang (☯) symbol with correct traditional colors
+- **Eight Trigrams**: All eight trigrams (☰☱☲☳☴☵☶☷) positioned around the center
+- **Chinese Labels**: Traditional names for each trigram (乾兌離震巽坎艮坤)
+- **Palace Numbers**: Nine Palace numbers (一二三四五六七八九) in their corresponding positions
+- **Responsive SVG**: Scalable vector graphics that work on all screen sizes
+
+### General Features
 - **Modern UI**: Beautiful, responsive design with smooth animations
+- **Tab Navigation**: Easy switching between Qimen and Bagua views
+- **Cross-Platform**: Works as Electron app or in modern web browsers
 
 ## Installation
-
-1. Navigate to the project directory:
+1. Clone the project
    ```bash
-   cd /Users/jianbli/Documents/Development/Qimen
+   git clone <github url>
    ```
 
-2. Install dependencies:
+2. Navigate to the project directory:
+   ```bash
+   cd Qimen
+   ```
+
+3. Install dependencies:
    ```bash
    npm install
    ```
@@ -106,15 +123,46 @@ The grid follows the traditional Qimen arrangement:
 - Smooth animations and transitions
 - Console logging for debugging
 
+## Architecture
+
+The application is built with a modular structure, separating concerns between different components:
+
+```mermaid
+graph TB
+    A["index.html<br/>(186 lines)"] --> B["bagua-ui.js<br/>(124 lines)"]
+    A --> C["renderer.js<br/>(Qimen logic)"]
+    A --> D["styles.css<br/>(Styling)"]
+    
+    B --> E["initializeBagua()"]
+    B --> F["drawTaiji()"]
+    B --> G["label()"]
+    B --> H["text_rotation_x/y()"]
+    
+    I["Tab Navigation"] --> E
+    E --> J["Trigram Symbols ☰☱☲☳"]
+    E --> K["Chinese Labels 乾兌離震"]  
+    E --> L["Palace Numbers 一二三四"]
+    E --> M["Taiji Symbol ☯"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style E fill:#e8f5e8
+    style J fill:#fff3e0
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+
 ## File Structure
 
 ```
 Qimen/
 ├── package.json          # Project configuration
 ├── main.js              # Electron main process
-├── index.html           # UI layout
+├── index.html           # UI layout and tab navigation
 ├── styles.css           # Styling and animations  
-├── renderer.js          # Application logic
+├── renderer.js          # Qimen Dunjia application logic
+├── bagua-ui.js          # Bagua diagram functionality
 └── README.md           # This file
 ```
 
@@ -125,4 +173,11 @@ While built as an Electron app, the HTML/CSS/JS can also run in modern browsers 
 - ES6 Classes
 - Modern JavaScript features
 
+A server can be started with the command
+```bash
+python3 -m http.server 8000
+```
+
+
 Enjoy exploring Qimen patterns!
+
