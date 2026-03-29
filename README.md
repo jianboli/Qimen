@@ -1,6 +1,6 @@
 # 奇门遁甲 - 十天干与九宫八卦
 
-A beautiful Electron application for exploring Qimen Dunjia patterns with the Ten Heavenly Stems and Nine Palaces.
+A web application for exploring Qimen Dunjia patterns with the Ten Heavenly Stems and Nine Palaces. Opens on the **奇门排盘** tab by default.
 
 ## Features
 
@@ -27,10 +27,20 @@ A beautiful Electron application for exploring Qimen Dunjia patterns with the Te
 - **Palace Numbers**: Nine Palace numbers (一二三四五六七八九) in their corresponding positions
 - **Responsive SVG**: Scalable vector graphics that work on all screen sizes
 
+### 奇门排盘 (Qimen Paipan) Tab ← default landing page
+- **时家奇门** with **拆补法** (Chai Bu method)
+- Auto-calculates bureau (局数), solar term (节气), duty star (值符/值使)
+- Displays all 9 palaces with: 天盘干, 地盘干, 九星, 八门, 八神
+- "当前时间排盘" button to generate a chart for right now
+
+### 干支计算 (GanZhi Calculator) Tab
+- Calculates the Four Pillars (四柱八字) for any date/time
+- Accounts for 立春 year boundary, 24 solar term month boundaries, and 时辰 hour periods
+- "此刻干支" button for the current moment
+
 ### General Features
-- **Modern UI**: Beautiful, responsive design with smooth animations
-- **Tab Navigation**: Easy switching between Qimen and Bagua views
-- **Cross-Platform**: Works as Electron app or in modern web browsers
+- **Tab Navigation**: Easy switching between all four views
+- **Runs in any modern browser** — no Electron required
 
 ## Installation
 1. Clone the project
@@ -50,14 +60,21 @@ A beautiful Electron application for exploring Qimen Dunjia patterns with the Te
 
 ## Running the App
 
-Start the application:
+**Recommended — with hot reload:**
 ```bash
-npm start
+npx live-server
+```
+Opens automatically at `http://localhost:8080` and reloads on any file save.
+
+**Alternative — static server:**
+```bash
+python3 -m http.server 8000
 ```
 
-For development with logging:
+**Electron (desktop app):**
 ```bash
-npm run dev
+npm start        # production
+npm run dev      # with DevTools
 ```
 
 ## How to Use
@@ -117,11 +134,10 @@ The grid follows the traditional Qimen arrangement:
 
 ## Technical Details
 
-- Built with Electron for cross-platform compatibility
-- Modern JavaScript ES6+ features
+- Pure HTML/CSS/JS — runs in any modern browser
+- D3.js (CDN) for the Bagua diagram
 - CSS Grid for responsive layout
-- Smooth animations and transitions
-- Console logging for debugging
+- Electron supported but not required
 
 ## Architecture
 
@@ -158,26 +174,15 @@ graph TB
 ```
 Qimen/
 ├── package.json          # Project configuration
-├── main.js              # Electron main process
+├── main.js              # Electron main process (optional)
 ├── index.html           # UI layout and tab navigation
-├── styles.css           # Styling and animations  
-├── renderer.js          # Qimen Dunjia application logic
-├── bagua-ui.js          # Bagua diagram functionality
-└── README.md           # This file
+├── styles.css           # Styling and animations
+├── renderer.js          # Qimen Dunjia grid logic
+├── bagua-ui.js          # Bagua diagram (D3.js)
+├── ganzhi.js            # Four Pillars calculator
+├── qimen-paipan.js      # 时家奇门 排盘 system
+└── README.md            # This file
 ```
-
-## Browser Compatibility
-
-While built as an Electron app, the HTML/CSS/JS can also run in modern browsers that support:
-- CSS Grid
-- ES6 Classes
-- Modern JavaScript features
-
-A server can be started with the command
-```bash
-python3 -m http.server 8000
-```
-
 
 Enjoy exploring Qimen patterns!
 

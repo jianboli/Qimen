@@ -14,13 +14,15 @@
 
         <!-- Tab Navigation -->
         <div class="tab-navigation">
-            <button class="tab-button active" data-tab="qimen-tab">奇门遁甲</button>
+            <button class="tab-button" data-tab="qimen-tab">奇门遁甲</button>
             <button class="tab-button" data-tab="bagua-tab">八卦图</button>
+            <button class="tab-button" data-tab="ganzhi-tab">干支计算</button>
+            <button class="tab-button active" data-tab="paipan-tab">奇门排盘</button>
         </div>
 
         <main>
             <!-- Qimen Tab Content -->
-            <div id="qimen-tab" class="tab-content active">
+            <div id="qimen-tab" class="tab-content">
             <div class="controls">
                 <div class="control-group">
                     <label for="direction">五遁</label>
@@ -142,6 +144,290 @@
                     </div>
                 </div>
             </div>
+
+            <!-- GanZhi Calculator Tab -->
+            <div id="ganzhi-tab" class="tab-content">
+                <div class="ganzhi-container">
+                    <h2>干支计算器</h2>
+                    <p class="ganzhi-description">计算任意日期和时辰的四柱八字</p>
+
+                    <div class="ganzhi-controls">
+                        <div class="control-group">
+                            <label for="ganzhi-date">选择日期：</label>
+                            <input type="date" id="ganzhi-date" class="date-input">
+                        </div>
+                        <div class="control-group">
+                            <label for="ganzhi-time">选择时间（可选）：</label>
+                            <input type="time" id="ganzhi-time" class="date-input">
+                        </div>
+                        <button id="calculate-ganzhi" class="btn-primary">计算干支</button>
+                        <button id="now-ganzhi" class="btn-secondary">此刻干支</button>
+                    </div>
+
+                    <div class="ganzhi-result">
+                        <div class="result-row">
+                            <span class="result-label">年柱（干支）：</span>
+                            <span id="year-ganzhi" class="result-value">--</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">月柱（干支）：</span>
+                            <span id="month-ganzhi" class="result-value">--</span>
+                        </div>
+                        <div class="result-row">
+                            <span class="result-label">日柱（干支）：</span>
+                            <span id="day-ganzhi" class="result-value">--</span>
+                        </div>
+                        <div class="result-row" id="hour-row" style="display: none;">
+                            <span class="result-label">时柱（干支）：</span>
+                            <span id="hour-ganzhi" class="result-value">--</span>
+                            <span id="shichen-name" class="shichen-label"></span>
+                        </div>
+                        <div class="result-row formatted">
+                            <span class="result-label">四柱八字：</span>
+                            <span id="full-ganzhi" class="result-value-large">-- -- --</span>
+                        </div>
+                    </div>
+
+                    <div class="ganzhi-info">
+                        <h3>说明</h3>
+                        <ul>
+                            <li>年柱以<strong>立春</strong>为界（约2月4-5日），立春前算前一年</li>
+                            <li>月柱以<strong>节气</strong>为界（如立春、惊蛰、清明等）</li>
+                            <li>日柱根据公历日期直接计算</li>
+                            <li>时柱以<strong>时辰</strong>为准（每个时辰2小时，子时23:00-01:00）</li>
+                            <li>天干：甲乙丙丁戊己庚辛壬癸（10个）</li>
+                            <li>地支：子丑寅卯辰巳午未申酉戌亥（12个）</li>
+                            <li>六十甲子周期：天干地支组合共60种</li>
+                            <li>四柱八字：年月日时四柱，每柱一干一支，共八个字</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qimen Paipan Tab -->
+            <div id="paipan-tab" class="tab-content active">
+                <div class="paipan-container">
+                    <h2>奇门排盘 - 时家奇门</h2>
+                    <p class="paipan-description">拆补法排盘系统</p>
+
+                    <div class="paipan-controls">
+                        <div class="control-group">
+                            <label for="paipan-date">选择日期：</label>
+                            <input type="date" id="paipan-date" class="date-input">
+                        </div>
+                        <div class="control-group">
+                            <label for="paipan-time">选择时间：</label>
+                            <input type="time" id="paipan-time" class="date-input">
+                        </div>
+                        <button id="paipan-now" class="btn-primary">当前时间排盘</button>
+                        <button id="paipan-calculate" class="btn-secondary">排盘</button>
+                    </div>
+
+                    <div class="paipan-info-bar">
+                        <div class="info-item">
+                            <span class="info-label">年干支：</span>
+                            <span id="info-year-gz" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">月干支：</span>
+                            <span id="info-month-gz" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">日干支：</span>
+                            <span id="info-day-gz" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">时干支：</span>
+                            <span id="info-hour-gz" class="info-value">--</span>
+                        </div>
+                    </div>
+
+                    <div class="paipan-info-bar">
+                        <div class="info-item">
+                            <span class="info-label">节气：</span>
+                            <span id="info-jieqi" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">局数：</span>
+                            <span id="info-ju" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">旬首：</span>
+                            <span id="info-xunshou" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">值符：</span>
+                            <span id="info-zhifu" class="info-value">--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">值使：</span>
+                            <span id="info-zhishi" class="info-value">--</span>
+                        </div>
+                    </div>
+
+                    <div class="paipan-grid">
+                        <!-- 9宫格 -->
+                        <div class="paipan-cell" data-palace="4">
+                            <div class="palace-header">
+                                <span class="palace-name">巽四宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-3"></div>
+                                <div class="element jiuxing" id="jiuxing-3"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-3"></span>
+                                    <span class="element tianpan" id="tianpan-3"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-3"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="9">
+                            <div class="palace-header">
+                                <span class="palace-name">离九宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-8"></div>
+                                <div class="element jiuxing" id="jiuxing-8"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-8"></span>
+                                    <span class="element tianpan" id="tianpan-8"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-8"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="2">
+                            <div class="palace-header">
+                                <span class="palace-name">坤二宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-1"></div>
+                                <div class="element jiuxing" id="jiuxing-1"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-1"></span>
+                                    <span class="element tianpan" id="tianpan-1"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="3">
+                            <div class="palace-header">
+                                <span class="palace-name">震三宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-2"></div>
+                                <div class="element jiuxing" id="jiuxing-2"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-2"></span>
+                                    <span class="element tianpan" id="tianpan-2"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-2"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell center" data-palace="5">
+                            <div class="palace-header">
+                                <span class="palace-name">中五宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element jiuxing center-star" id="jiuxing-4"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-4"></span>
+                                    <span class="element tianpan" id="tianpan-4"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="7">
+                            <div class="palace-header">
+                                <span class="palace-name">兑七宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-6"></div>
+                                <div class="element jiuxing" id="jiuxing-6"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-6"></span>
+                                    <span class="element tianpan" id="tianpan-6"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-6"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="8">
+                            <div class="palace-header">
+                                <span class="palace-name">艮八宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-7"></div>
+                                <div class="element jiuxing" id="jiuxing-7"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-7"></span>
+                                    <span class="element tianpan" id="tianpan-7"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-7"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="1">
+                            <div class="palace-header">
+                                <span class="palace-name">坎一宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-0"></div>
+                                <div class="element jiuxing" id="jiuxing-0"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-0"></span>
+                                    <span class="element tianpan" id="tianpan-0"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-0"></div>
+                            </div>
+                        </div>
+
+                        <div class="paipan-cell" data-palace="6">
+                            <div class="palace-header">
+                                <span class="palace-name">乾六宫</span>
+                            </div>
+                            <div class="palace-content">
+                                <div class="element bashen" id="bashen-5"></div>
+                                <div class="element jiuxing" id="jiuxing-5"></div>
+                                <div class="element-row">
+                                    <span class="element dipan" id="dipan-5"></span>
+                                    <span class="element tianpan" id="tianpan-5"></span>
+                                </div>
+                                <div class="element bamen" id="bamen-5"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="paipan-legend">
+                        <h3>图例说明</h3>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <span class="legend-color bashen-color"></span>
+                                <span>八神</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color jiuxing-color"></span>
+                                <span>九星</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color dipan-color"></span>
+                                <span>地盘干</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color tianpan-color"></span>
+                                <span>天盘干</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color bamen-color"></span>
+                                <span>八门</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
@@ -149,6 +435,10 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <!-- Bagua UI functionality -->
     <script src="bagua-ui.js"></script>
+    <!-- GanZhi Calculator -->
+    <script src="ganzhi.js"></script>
+    <!-- Qimen Paipan -->
+    <script src="qimen-paipan.js"></script>
     <!-- Tab functionality script -->
     <script>
         // Tab switching functionality
@@ -178,7 +468,198 @@
                 });
             });
 
+            // Initialize GanZhi Calculator
+            const ganzhiDateInput = document.getElementById('ganzhi-date');
+            const ganzhiTimeInput = document.getElementById('ganzhi-time');
+            const calculateBtn = document.getElementById('calculate-ganzhi');
+            const nowBtn = document.getElementById('now-ganzhi');
+            const hourRow = document.getElementById('hour-row');
 
+            // Set today's date as default
+            const today = new Date();
+            const todayString = today.toISOString().split('T')[0];
+            ganzhiDateInput.value = todayString;
+
+            // Calculate and display GanZhi
+            function displayGanZhi(dateString, timeString) {
+                let result;
+
+                if (timeString) {
+                    result = dateTimeToGanZhi(dateString, timeString);
+                    document.getElementById('year-ganzhi').textContent = result.year;
+                    document.getElementById('month-ganzhi').textContent = result.month;
+                    document.getElementById('day-ganzhi').textContent = result.day;
+                    document.getElementById('hour-ganzhi').textContent = result.hour;
+
+                    // Get and display 时辰 name
+                    const timeParts = timeString.split(':');
+                    const hour = parseInt(timeParts[0], 10);
+                    const shichenName = getShichenName(hour);
+                    document.getElementById('shichen-name').textContent = `（${shichenName}）`;
+
+                    hourRow.style.display = 'flex';
+                    document.getElementById('full-ganzhi').textContent = result.formatted;
+                } else {
+                    result = dateToGanZhi(dateString);
+                    document.getElementById('year-ganzhi').textContent = result.year;
+                    document.getElementById('month-ganzhi').textContent = result.month;
+                    document.getElementById('day-ganzhi').textContent = result.day;
+                    hourRow.style.display = 'none';
+                    document.getElementById('full-ganzhi').textContent = result.formatted;
+                }
+            }
+
+            // Calculate button click
+            calculateBtn.addEventListener('click', function() {
+                const dateValue = ganzhiDateInput.value;
+                const timeValue = ganzhiTimeInput.value;
+                if (dateValue) {
+                    displayGanZhi(dateValue, timeValue);
+                } else {
+                    alert('请选择日期');
+                }
+            });
+
+            // Now button click
+            nowBtn.addEventListener('click', function() {
+                const now = new Date();
+                const nowDateString = now.toISOString().split('T')[0];
+                const nowTimeString = now.toTimeString().split(' ')[0].substring(0, 5);
+                ganzhiDateInput.value = nowDateString;
+                ganzhiTimeInput.value = nowTimeString;
+                displayGanZhi(nowDateString, nowTimeString);
+            });
+
+            // Calculate automatically when date or time changes
+            ganzhiDateInput.addEventListener('change', function() {
+                if (this.value) {
+                    displayGanZhi(this.value, ganzhiTimeInput.value);
+                }
+            });
+
+            ganzhiTimeInput.addEventListener('change', function() {
+                if (ganzhiDateInput.value) {
+                    displayGanZhi(ganzhiDateInput.value, this.value);
+                }
+            });
+
+            // Display today's GanZhi on load (without time)
+            displayGanZhi(todayString, null);
+
+            // Initialize Qimen Paipan
+            const paipanDateInput = document.getElementById('paipan-date');
+            const paipanTimeInput = document.getElementById('paipan-time');
+            const paipanNowBtn = document.getElementById('paipan-now');
+            const paipanCalculateBtn = document.getElementById('paipan-calculate');
+
+            // Set current date and time as default
+            paipanDateInput.value = todayString;
+            const nowTime = new Date().toTimeString().split(' ')[0].substring(0, 5);
+            paipanTimeInput.value = nowTime;
+
+            // Display Qimen chart
+            function displayQimenChart(dateString, timeString) {
+                if (!dateString || !timeString) {
+                    alert('请选择日期和时间');
+                    return;
+                }
+
+                // Parse date and time
+                const parts = dateString.split('-');
+                const year = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10);
+                const day = parseInt(parts[2], 10);
+
+                const timeParts = timeString.split(':');
+                const hour = parseInt(timeParts[0], 10);
+
+                // Get all ganzhi
+                const yearGZ = getYearGanZhi(year, month, day);
+                const monthGZ = getMonthGanZhi(year, month, day);
+                const dayGZ = getDayGanZhi(year, month, day);
+                const hourGZ = getHourGanZhi(year, month, day, hour, 0);
+
+                // Create chart
+                const chart = createQimenChart(year, month, day, hour, dayGZ, hourGZ);
+
+                // Update ganzhi info bar
+                document.getElementById('info-year-gz').textContent = yearGZ;
+                document.getElementById('info-month-gz').textContent = monthGZ;
+                document.getElementById('info-day-gz').textContent = dayGZ;
+                document.getElementById('info-hour-gz').textContent = hourGZ;
+
+                // Update chart info bar
+                document.getElementById('info-jieqi').textContent = chart.jieqi;
+                document.getElementById('info-ju').textContent =
+                    `${chart.juInfo.type}${chart.juInfo.ju}局 (${chart.juInfo.yuan})`;
+                document.getElementById('info-xunshou').textContent =
+                    `${chart.xunShou}旬 (${chart.xunYi})`;
+                document.getElementById('info-zhifu').textContent =
+                    `${chart.zhiFuStar} 在 ${chart.palaces[chart.zhiFuPalace - 1].gongWei}`;
+                document.getElementById('info-zhishi').textContent =
+                    `${chart.zhiShiMen} 在 ${chart.palaces[chart.zhiShiPalace - 1].gongWei}`;
+
+                // Update palaces
+                console.log('=== Display Debug ===');
+                chart.palaces.forEach((palace, index) => {
+                    console.log(`Display Palace ${palace.palace} (index ${index}): 地盘=${palace.diPanGan} → dipan-${index}`);
+                    document.getElementById(`dipan-${index}`).textContent = palace.diPanGan;
+                    document.getElementById(`tianpan-${index}`).textContent = palace.tianPanGan;
+
+                    // 九星附天干显示：{九星}（{天盘干}）
+                    // 天芮宫同时显示天禽（天禽寄坤二宫随天芮运转）
+                    let jiuxingText = palace.jiuXing ? `${palace.jiuXing}（${palace.tianPanGan}）` : '';
+                    if (palace.jiuXing === '天芮') {
+                        jiuxingText += `\n天禽（${palace.diPanGan}·）`;
+                    }
+                    document.getElementById(`jiuxing-${index}`).textContent = jiuxingText;
+
+                    // Check if element exists before setting (中宫 has no baMen)
+                    const baMenElement = document.getElementById(`bamen-${index}`);
+                    if (baMenElement) {
+                        baMenElement.textContent = palace.baMen || '';
+                    }
+
+                    // Check if element exists before setting (中宫 has no baShen)
+                    const baShenElement = document.getElementById(`bashen-${index}`);
+                    if (baShenElement) {
+                        baShenElement.textContent = palace.baShen || '';
+                    }
+                });
+
+                // Debug: log the chart
+                console.log('Chart:', chart);
+
+                console.log('Qimen Chart:', chart);
+            }
+
+            // Now button click
+            paipanNowBtn.addEventListener('click', function() {
+                const now = new Date();
+                const nowDateString = now.toISOString().split('T')[0];
+                const nowTimeString = now.toTimeString().split(' ')[0].substring(0, 5);
+                paipanDateInput.value = nowDateString;
+                paipanTimeInput.value = nowTimeString;
+                displayQimenChart(nowDateString, nowTimeString);
+            });
+
+            // Calculate button click
+            paipanCalculateBtn.addEventListener('click', function() {
+                displayQimenChart(paipanDateInput.value, paipanTimeInput.value);
+            });
+
+            // Auto-calculate when date or time changes
+            paipanDateInput.addEventListener('change', function() {
+                if (this.value && paipanTimeInput.value) {
+                    displayQimenChart(this.value, paipanTimeInput.value);
+                }
+            });
+
+            paipanTimeInput.addEventListener('change', function() {
+                if (this.value && paipanDateInput.value) {
+                    displayQimenChart(paipanDateInput.value, this.value);
+                }
+            });
         });
     </script>
     <script src="renderer.js"></script>

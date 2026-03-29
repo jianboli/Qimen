@@ -393,3 +393,453 @@ select:focus {
         font-size: 0.9rem;
     }
 }
+
+/* GanZhi Calculator Styles */
+.ganzhi-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.ganzhi-container h2 {
+    color: #667eea;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.ganzhi-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.ganzhi-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.ganzhi-controls .control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.ganzhi-controls label {
+    font-weight: 500;
+    color: #555;
+    min-width: 100px;
+}
+
+.date-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.date-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.ganzhi-result {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 30px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-row.formatted {
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.result-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 1rem;
+}
+
+.result-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #667eea;
+    font-family: 'Times New Roman', serif;
+}
+
+.result-value-large {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #764ba2;
+    font-family: 'Times New Roman', serif;
+    letter-spacing: 0.3em;
+}
+
+.shichen-label {
+    font-size: 0.9rem;
+    color: #999;
+    font-weight: 500;
+    margin-left: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ganzhi-info {
+    background: #f9fafb;
+    border-radius: 15px;
+    padding: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.ganzhi-info h3 {
+    color: #667eea;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.ganzhi-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ganzhi-info li {
+    padding: 8px 0;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.ganzhi-info li:before {
+    content: "•";
+    color: #667eea;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+    padding-right: 0.5em;
+}
+
+.ganzhi-info strong {
+    color: #764ba2;
+}
+
+/* Mobile responsive for GanZhi */
+@media (max-width: 600px) {
+    .ganzhi-container {
+        padding: 20px;
+    }
+
+    .ganzhi-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .ganzhi-controls .control-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .ganzhi-controls label {
+        min-width: auto;
+    }
+
+    .result-value {
+        font-size: 1.2rem;
+    }
+
+    .result-value-large {
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
+    }
+
+    .ganzhi-info li {
+        font-size: 0.85rem;
+    }
+}
+
+/* Qimen Paipan Styles */
+.paipan-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.paipan-container h2 {
+    color: #667eea;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.paipan-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+    font-size: 1rem;
+}
+
+.paipan-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.paipan-controls .control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.paipan-info-bar {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    border-radius: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.info-value {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 1.1rem;
+}
+
+/* Paipan Grid - 九宫格 */
+.paipan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 25px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.paipan-cell {
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    background: white;
+    padding: 10px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.paipan-cell:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+.paipan-cell.center {
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+    border-color: #764ba2;
+}
+
+.palace-header {
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.palace-name {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.9rem;
+}
+
+.palace-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.element {
+    text-align: center;
+    padding: 4px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.element-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.element-row .element {
+    flex: 1;
+}
+
+/* Element colors */
+.bashen {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.jiuxing {
+    background: #fef3c7;
+    color: #b45309;
+    white-space: pre-line;
+    line-height: 1.4;
+}
+
+.center-star {
+    font-size: 1rem;
+    padding: 8px;
+}
+
+.dipan {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.tianpan {
+    background: #fce7f3;
+    color: #be185d;
+}
+
+.bamen {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+/* Legend */
+.paipan-legend {
+    background: #f9fafb;
+    border-radius: 15px;
+    padding: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.paipan-legend h3 {
+    color: #667eea;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.legend-color {
+    width: 24px;
+    height: 24px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.bashen-color {
+    background: #e0e7ff;
+}
+
+.jiuxing-color {
+    background: #fef3c7;
+}
+
+.dipan-color {
+    background: #d1fae5;
+}
+
+.tianpan-color {
+    background: #fce7f3;
+}
+
+.bamen-color {
+    background: #ffe4e6;
+}
+
+/* Mobile responsive for Paipan */
+@media (max-width: 768px) {
+    .paipan-container {
+        padding: 15px;
+    }
+
+    .paipan-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .paipan-grid {
+        gap: 5px;
+    }
+
+    .paipan-cell {
+        min-height: 140px;
+        padding: 8px;
+    }
+
+    .palace-name {
+        font-size: 0.8rem;
+    }
+
+    .element {
+        font-size: 0.75rem;
+        padding: 3px;
+    }
+
+    .info-label, .info-value {
+        font-size: 0.85rem;
+    }
+
+    .paipan-info-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

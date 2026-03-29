@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Display</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 120px); gap: 10px; margin: 20px 0; }
+        .cell { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        .palace-name { font-size: 12px; color: #666; }
+        .dipan { font-size: 20px; font-weight: bold; color: #0066cc; }
+    </style>
+</head>
+<body>
+    <h1>奇门排盘 Display Test - 阳遁3局</h1>
+    <p>Testing if array indices correctly map to display elements</p>
+
+    <div class="grid">
+        <div class="cell">
+            <div class="palace-name">巽四宫 (Palace 4)</div>
+            <div class="dipan" id="dipan-3">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">离九宫 (Palace 9)</div>
+            <div class="dipan" id="dipan-8">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">坤二宫 (Palace 2)</div>
+            <div class="dipan" id="dipan-1">--</div>
+        </div>
+
+        <div class="cell">
+            <div class="palace-name">震三宫 (Palace 3)</div>
+            <div class="dipan" id="dipan-2">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">中五宫 (Palace 5)</div>
+            <div class="dipan" id="dipan-4">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">兑七宫 (Palace 7)</div>
+            <div class="dipan" id="dipan-6">--</div>
+        </div>
+
+        <div class="cell">
+            <div class="palace-name">艮八宫 (Palace 8)</div>
+            <div class="dipan" id="dipan-7">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">坎一宫 (Palace 1)</div>
+            <div class="dipan" id="dipan-0">--</div>
+        </div>
+        <div class="cell">
+            <div class="palace-name">乾六宫 (Palace 6)</div>
+            <div class="dipan" id="dipan-5">--</div>
+        </div>
+    </div>
+
+    <h2>Expected Values for 阳遁3局:</h2>
+    <ul id="expected"></ul>
+
+    <h2>Display Test Results:</h2>
+    <ul id="results"></ul>
+
+    <script src="qimen-paipan.js"></script>
+    <script>
+        // Create chart for 阳遁3局
+        const chart = createQimenChart(2024, 2, 16, 10, '甲子', '戊辰');
+
+        console.log('=== Test Display Page ===');
+        console.log('Chart created:', chart);
+
+        // Expected values for 阳遁3局
+        const expected = {
+            1: '丙', 2: '乙', 3: '戊', 4: '己', 5: '庚',
+            6: '辛', 7: '壬', 8: '癸', 9: '丁'
+        };
+
+        // Show expected values
+        const expectedList = document.getElementById('expected');
+        for (let palace = 1; palace <= 9; palace++) {
+            const li = document.createElement('li');
+            li.textContent = `Palace ${palace}: ${expected[palace]}`;
+            expectedList.appendChild(li);
+        }
+
+        // Update display using the same logic as index.html
+        chart.palaces.forEach((palace, index) => {
+            console.log(`Setting dipan-${index} = '${palace.diPanGan}' (Palace ${palace.palace})`);
+            document.getElementById(`dipan-${index}`).textContent = palace.diPanGan;
+        });
+
+        // Verify display
+        const resultsList = document.getElementById('results');
+        let allCorrect = true;
+
+        for (let palace = 1; palace <= 9; palace++) {
+            const elementId = `dipan-${palace - 1}`;
+            const displayedValue = document.getElementById(elementId).textContent;
+            const expectedValue = expected[palace];
+            const match = displayedValue === expectedValue;
+
+            const li = document.createElement('li');
+            li.textContent = `Palace ${palace} (${elementId}): Expected='${expectedValue}', Displayed='${displayedValue}' ${match ? '✓' : '✗'}`;
+            li.style.color = match ? 'green' : 'red';
+            li.style.fontWeight = match ? 'normal' : 'bold';
+            resultsList.appendChild(li);
+
+            if (!match) allCorrect = false;
+        }
+
+        // Summary
+        const summary = document.createElement('h3');
+        summary.textContent = allCorrect ? '✓ All values display correctly!' : '✗ Some values display incorrectly!';
+        summary.style.color = allCorrect ? 'green' : 'red';
+        document.body.appendChild(summary);
+    </script>
+</body>
+</html>
